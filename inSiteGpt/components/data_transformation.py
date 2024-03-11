@@ -14,6 +14,7 @@ class DataTransformation:
             logging.info(f"Shape of df: {df.shape}")
             logging.info("New column 'NameDescription' added")
             df["NameDescription"] = df["ProductName"] + df["Description"]
+            return df
 
         except Exception as e:
             raise inSiteGptException(e,sys)
