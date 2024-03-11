@@ -10,7 +10,9 @@ class DataIngestion:
         try:
             logging.info("Importing csv file")
             df = pd.read_csv(data_path+"myntra_products_catalog.csv")[:500]
-            df.dropna(inplace=True)
-            logging.info(f"Shape of df: {df.shape}")
+            return df 
+        
         except Exception as e:
             raise inSiteGptException(e,sys)
+        
+    
