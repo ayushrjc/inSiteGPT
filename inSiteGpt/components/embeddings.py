@@ -1,11 +1,15 @@
 import sys
 from inSiteGpt.logger import logging
 from inSiteGpt.exception import inSiteGptException
+from inSiteGpt.embedding_models.bert_embedding import BertDataEmbeddings
 
 class DataEmbeddings:
-    def embedding_function(self,df):
+    def __init__(self):
+        self.bert_emb_obj = BertDataEmbeddings()
+
+    def embedding_function_using_bert(self,df):
         try:
-            # return embadded df with df['embedded_column']
+            df=self.bert_emb_obj.embedding(df)
             return df
         except Exception as e:
             raise inSiteGptException(e,sys)

@@ -14,6 +14,7 @@ class DataTransformation:
             logging.info(f"Shape of df: {df.shape}")
             logging.info("New column 'NameDescription' added")
             df["NameDescription"] = df["ProductName"] + df["Description"]
+            logging.info(f"df: {df.head(2)}")
             return df
 
         except Exception as e:

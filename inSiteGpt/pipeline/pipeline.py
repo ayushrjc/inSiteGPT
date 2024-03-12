@@ -21,11 +21,13 @@ class StartPipeline:
             logging.info("Entered into StartPipeline Class")
             df = self.data_ingest.get_csv()
             transformed_df = self.data_transform.transform_df(df)
-            embedded_data = self.data_embedding.embedding_function(transformed_df)
+            embedded_data = self.data_embedding.embedding_function_using_bert(transformed_df)
             es = self.es_operations.connect()
-            sample_index_mapping = self.index_mapping.sample_index_mapping()
-            self.es_operations.create_indices(es=es,index=index_pattern,indexMapping=sample_index_mapping)
+            vector_index_mapping = self.index_mapping.vector_index_mapping()
+            self.es_operations.create_indices(es=es,index=index_pattern,indexMapping=vector_index_mapping)
             docs = embedded_data.to_dict("records")
+
+            # Insert for the first time
             self.es_operations.insert_doc(es=es,index_pattern=index_pattern,docs=docs)
             logging.info(f"{es.count(index=index_pattern)}")
             
