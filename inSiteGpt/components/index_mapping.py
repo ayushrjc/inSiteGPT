@@ -44,6 +44,7 @@ class IndexMapping:
     
     def vector_index_mapping(self):
         try:
+            # "dims": 768 for bert embeddings
             indexMapping = {
                 "properties":{
                     "ProductID":{
@@ -75,7 +76,7 @@ class IndexMapping:
                     },
                     "NameDescriptionVector":{
                         "type":"dense_vector",
-                        "dims": 1536,
+                        "dims": 768,
                         "index":True,
                         "similarity": "l2_norm"
                     }
